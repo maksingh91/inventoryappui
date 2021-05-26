@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products | async">
+          <tr *ngFor="let product of products">
             <td>{{product.productName}}</td>
             <td>{{product.productCatagory}}</td>
             <td>{{product.productDescription}}</td>
@@ -24,6 +24,9 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> 
+
+     
+
     </div>
   </div>

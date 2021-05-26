@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  private url= 'http://localhost:8085/inventory';
+  //private url= 'http://20.84.34.113/inventory';
+  private url= 'http://inventoryapp.52.226.103.162.nip.io/inventoryapp/inventory';
 
   constructor(private http: HttpClient) { }
 
