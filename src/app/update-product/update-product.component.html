@@ -1,6 +1,6 @@
 <h2>Update Product Details</h2> 
 
-<div [hidden]="submitted" style="width: 500px;">
+<div style="width: 500px;">
     <form (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="fname">Product Name</label>
@@ -26,6 +26,7 @@
     </form>
   </div>
   
-  <div [hidden]="!submitted">
-    <h4> Updated successfully!</h4>
+  <div *ngIf="submitted">
+    <br>
+    <h4 style="color: blue;">{{responseMsg}}</h4>
   </div>

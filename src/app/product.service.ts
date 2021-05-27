@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { Product } from './product';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-
-  //private url= 'http://20.84.34.113/inventory';
-  private url= 'http://inventoryapp.52.226.103.162.nip.io/inventoryapp/inventory';
+ 
+  private url= environment.baseUrl+"/inventory";
+  
+  product!: Product;
+  products!: Product[];
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +20,12 @@ export class ProductService {
     return this.http.get(`${this.url}/getproduct?id=${id}`);
   }
 
-  createProduct(employee: Object): Observable<Object> {
-    return this.http.post(`${this.url}/addproduct`, employee);
+  searchProduct(category: String): Observable<any> {
+    return this.http.get(`${this.url}/searchproductsbycategory?category=${category}`);
+  }
+
+  createProduct(product: Object): Observable<Object> {
+    return this.http.post(`${this.url}/addproduct`, product);
   }
 
   updateProduct(value: any): Observable<Object> {
@@ -27,4 +35,20 @@ export class ProductService {
   getProductList(): Observable<any> {
     return this.http.get(`${this.url}/getallproducts`);
   }
+
+  setProductForUpdate(product: Product){
+    this.product = product;
+  }
+
+  getProductForUpdate(){
+    return this.product;
+  }
+
+  getAllProducts(): Product[] {
+    return this.products;
+  }
+  setAllProducts(products: Product[]) {
+    this.products=products;
+  }
+
 }

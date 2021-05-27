@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  //baseUrl: 'http://localhost:8085'
+  baseUrl: 'http://inventoryapp.52.226.103.162.nip.io/inventoryapp'
 };
 
 /*

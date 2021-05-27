@@ -10,30 +10,38 @@ import { ProductService } from '../product.service';
 })
 export class UpdateProductComponent implements OnInit {
 
-  id: number = 0;
-  product: Product = new Product();;
+  //id: number = 0;
+  product!: Product;
   submitted = false;
+  responseMsg!: String;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private ps: ProductService) { }
 
   ngOnInit() {
-    this.product = new Product();
+    this.product = this.ps.getProductForUpdate();
     this.submitted = false;
-    this.id = this.route.snapshot.params['id'];
+   // this.id = this.route.snapshot.params['id'];
     
-    this.ps.getProduct(this.id)
-      .subscribe(data => {
-        console.log(data)
-        this.product = data;
-      }, error => console.log(error));
+    // this.ps.getProduct(this.id)
+    //   .subscribe(data => {
+    //     console.log(data)
+    //     this.product = data;
+    //   }, error => console.log(error));
   }
 
   update() {
     this.ps.updateProduct(this.product)
-      .subscribe(data => console.log(data), error => console.log(error));
-    this.product = new Product();
-    this.gotoList();
+      .subscribe(data => {
+        console.log(data);
+        this.responseMsg = "Product Updated successfully!";
+        //this.gotoList();
+      },
+       error => {
+        console.log(error);
+        console.log(error.error.message);
+        this.responseMsg = error.error.message;
+       });
   }
 onSubmit() {
     this.submitted = true;
