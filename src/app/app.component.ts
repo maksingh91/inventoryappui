@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 import { SecurityService } from './security.service';
 
 @Component({
@@ -7,15 +8,24 @@ import { SecurityService } from './security.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Inventory App';
-  isLoggedIn:boolean = this.ss.isLoggedIn();
+  isLoggedIn:boolean=false;
 
   constructor(private ss: SecurityService, private router: Router) {}
+
+  ngOnInit() {
+    this.isLoggedIn=this.ss.isLoggedIn();
+    interval(1000)
+    .subscribe(() => {
+      this.isLoggedIn=this.ss.isLoggedIn();
+    });
+  }
 
   logout(){
     this.ss.logout() .subscribe(() => {
       this.ss.removeToken();
+      this.isLoggedIn=false;
       this.router.navigate(['/login']);
     });
   }

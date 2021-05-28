@@ -16,6 +16,7 @@ import { WebsocketProdutcsComponent } from './websocket-produtcs/websocket-produ
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { AuthHeaderInterceptor } from './auth-header.interceptor';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
